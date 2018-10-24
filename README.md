@@ -56,12 +56,12 @@
 
 ### Add script to remove default not needed gateway (being 10.190.17.1 the gateway ETECSA is using on their DHCP)
 ```
-/system script add name=remove_default_gateway_route source=":put [/ip route remove [ find gateway=10.190.17.1 ]];" policy=dude,ftp,password,read,write,reboot,romon,sensitive,sniff,test
+/system script add name=remove_default_gateway_route source=":put [/ip route remove [ find gateway=10.190.17.1 ]];"
 ```
 
 #### Add scheduler for the previuos script
 ```
-/system scheduler add name=delete_default_route interval=10 on-event=remove_defailt_gateway_route
+/system scheduler add name=delete_default_route interval=10 on-event=remove_default_gateway_route
 ```
 
 ### Change the identity of your router so it does not look like MikroTik router
