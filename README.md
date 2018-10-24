@@ -61,7 +61,7 @@
 
 #### Add scheduler for the previuos script
 ```
-/system scheduler add name=delete_default_route interval=10 on-event=remove_default_gateway_route
+/system scheduler add name=delete_default_route interval=3s on-event=remove_default_gateway_route
 ```
 
 ### Change the identity of your router so it does not look like MikroTik router
