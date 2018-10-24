@@ -74,7 +74,7 @@
 ```
 /ip dhcp-client print             
 Flags: X - disabled, I - invalid, D - dynamic 
- #   INTERFACE                                                                                                                                                                                                USE-PEER-DNS ADD-DEFAULT-ROUTE STATUS        ADDRESS           
+ #   INTERFACE                               USE-PEER-DNS ADD-DEFAULT-ROUTE STATUS        ADDRESS
  0   ;;; defconf
      wlan2                                   yes          yes               bound         10.190.17.142/24  
  1   wlan3                                   yes          no                bound         10.190.17.202/24 
