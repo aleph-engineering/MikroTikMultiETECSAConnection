@@ -54,9 +54,14 @@
 /ip route add distance=1 gateway=10.190.17.1%wlan3 routing-mark=gateway2
 ```
 
-### Add script to remove default not needed gateway (being 10.190.17.1 the gateway ETECSA is using on their DHCP)
+### Add routing for your router (being 10.10.1.79 the ip of your router)
 ```
-/system script add name=remove_default_gateway_route source=":put [/ip route remove [ find gateway=10.190.17.1 ]];"
+/ip route add distance=1 gateway=10.190.17.1 pref-src=10.10.1.79
+```
+
+### Add script to remove default not needed gateway (being 10.190.17.1 the gateway ETECSA is using on their DHCP and 10.10.1.79 the ip of your router)
+```
+/system script add name=remove_default_gateway_route source=":put [/ip route remove [ find pref-src!="10.10.1.79" gateway="10.190.17.1" ]];"
 ```
 
 #### Add scheduler for the previuos script
