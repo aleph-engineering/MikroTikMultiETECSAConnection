@@ -29,7 +29,7 @@
 /ip dhcp-client add add-default-route=no dhcp-options=hostname,clientid disabled=no interface=wlan2
 /ip dhcp-client add add-default-route=no dhcp-options=hostname,clientid disabled=no interface=wlan3
 ```
-*note:* Probably **wlan2** already has a configured DHCP client so you might get an error
+*note:* Probably **wlan2** already has a configured DHCP client so you might get an error. Delete this client and try again.
 
 ### Create address lists to separate the traffic
 ```
@@ -54,19 +54,9 @@
 /ip route add distance=1 gateway=10.190.17.1%wlan3 routing-mark=gateway2
 ```
 
-### Add routing for your router (being 10.10.1.79 the ip of your router)
+### Add routing for DNS (being 181.225.231.110 one of the ETECSA DNS and 10.190.17.1 ETECSA's gateway for this connection)
 ```
-/ip route add distance=1 gateway=10.190.17.1 pref-src=10.10.1.79
-```
-
-### Add script to remove default not needed gateway (being 10.190.17.1 the gateway ETECSA is using on their DHCP and 10.10.1.79 the ip of your router)
-```
-/system script add name=remove_default_gateway_route source=":put [/ip route remove [ find pref-src!="10.10.1.79" gateway="10.190.17.1" ]];"
-```
-
-#### Add scheduler for the previuos script
-```
-/system scheduler add name=delete_default_route interval=3s on-event=remove_default_gateway_route
+/ip route add distance=1 dst-address=181.225.231.110/32 gateway=10.190.17.1
 ```
 
 ### Change the identity of your router so it does not look like MikroTik router
@@ -81,7 +71,7 @@
 Flags: X - disabled, I - invalid, D - dynamic 
  #   INTERFACE                               USE-PEER-DNS ADD-DEFAULT-ROUTE STATUS        ADDRESS
  0   ;;; defconf
-     wlan2                                   yes          yes               bound         10.190.17.142/24  
+     wlan2                                   yes          no                bound         10.190.17.142/24  
  1   wlan3                                   yes          no                bound         10.190.17.202/24 
 ```
 If not, remove the ones not related to wlan interfaces.
